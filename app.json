@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "HveMessanger",
+    "slug": "HveMessanger",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "HveMessanger"
+}
