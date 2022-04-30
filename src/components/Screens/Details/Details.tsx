@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Button, Text, Image} from "react-native";
+import {View, Button, Text, Image, TouchableOpacity} from "react-native";
 import {styles} from "./Style";
 
 import axios from "axios";
+import {Ionicons} from "@expo/vector-icons";
 
 export function Details({route, navigation}:any) {
 
@@ -11,13 +12,9 @@ export function Details({route, navigation}:any) {
     const [postData, setPostData] = useState<any>()
 
     useEffect(() => {
-        navigation.setOptions({
-            title: title,
-        });
         if(load) {
             axios.get('https://reqres.in/api/users/'+itemId, )
                 .then(function (response) {
-                    console.log(response.data)
                     setLoad(false)
                     if (response.data.data) {
                         setPostData(response.data.data)
@@ -28,6 +25,15 @@ export function Details({route, navigation}:any) {
                 })
         }
     }, [load]);
+
+    useEffect(() => {
+        const headerRight = <TouchableOpacity onPress={() => navigation.goBack()}><Ionicons name="arrow-back" size={20}/></TouchableOpacity>
+        navigation.setOptions({
+            headerLeft: () => headerRight,
+            headerTitle: title
+        });
+    }, [postData]);
+
 
     return (
         <View style={{ margin: 10}}>
