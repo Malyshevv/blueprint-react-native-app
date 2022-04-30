@@ -13,24 +13,32 @@ const screenOptionStyle = {
     headerStyle: {
         backgroundColor: "#ffffff",
     },
-    headerTitleAlign: 'center',
     headerTintColor: "black",
     headerBackTitle: "Back",
-    //headerLeft: () => headerLeft,
     headerRight: () => headerRight
 };
 
-const headerLeft = <TouchableOpacity onPress={() => alert('Левая кнопка!')}><Ionicons name="navigate" size={20}/></TouchableOpacity>
-const headerRight = <TouchableOpacity onPress={() => alert('Правая кнопка!')}><Ionicons name="shapes" size={20}/></TouchableOpacity>
+
 const headerTitle = (title:string) => { return  <Text style={{alignItems: 'center'}}>{title}</Text> }
+const headerRight = <TouchableOpacity onPress={() => alert('Правая кнопка!')}><Ionicons name="shapes" size={20}/></TouchableOpacity>
+const headerLeft = (navigation:any) => { return <TouchableOpacity onPress={() => navigation.openDrawer()}><Ionicons name="menu" size={20}/></TouchableOpacity>}
+/*
+* Drawer function
+navigation.openDrawer();
+navigation.closeDrawer();
+navigation.toggleDrawer();
+* */
+
 
 const MainStack = createNativeStackNavigator();
 
-const MainStackNavigator = () => {
+const MainStackNavigator = ({navigation}:any) => {
     return (
         <MainStack.Navigator screenOptions={
             {
                 ...screenOptionStyle,
+                headerTitleAlign: 'center',
+                headerLeft: () => headerLeft(navigation),
                 headerTitle: () => headerTitle('Home')
             }
         }>
@@ -40,11 +48,13 @@ const MainStackNavigator = () => {
     );
 }
 
-const ContactStackNavigator = () => {
+const ContactStackNavigator = ({navigation}:any) => {
     return (
         <MainStack.Navigator screenOptions={
             {
                 ...screenOptionStyle,
+                headerTitleAlign: 'center',
+                headerLeft: () => headerLeft(navigation),
                 headerTitle: () => headerTitle('Contact')
             }
         }>
@@ -53,11 +63,13 @@ const ContactStackNavigator = () => {
     );
 }
 
-const AboutStackNavigator = () => {
+const AboutStackNavigator = ({navigation}:any) => {
     return (
         <MainStack.Navigator screenOptions={
             {
                 ...screenOptionStyle,
+                headerTitleAlign: 'center',
+                headerLeft: () => headerLeft(navigation),
                 headerTitle: () => headerTitle('About')
             }
         }>

@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, TouchableOpacity , Text, FlatList, Image, RefreshControl} from "react-native";
-
-import axios from 'axios';
+import {View, ScrollView, TouchableOpacity , Text, FlatList, Image, RefreshControl} from "react-native";
 
 import {styles} from "./Style";
 import {usePostsLoad} from "../../../utils/hooks/useLoadPosts";
 import {useDispatch} from "react-redux";
 import {postsRequestAsync} from "../../../utils/redux/posts/reducerPosts";
 import {useStateIfMounted} from "use-state-if-mounted";
+import {CarouselMain} from "../../Carousel/CarouselMain";
 
 export function Home({navigation}:any) {
     const dispatch = useDispatch();
@@ -28,12 +27,10 @@ export function Home({navigation}:any) {
 
     const getData = (type:string,after:number) => {
         if(type === 'refreshLoad') {
-            // @ts-ignore
-            dispatch(postsRequestAsync(perPage));
+            dispatch<any>(postsRequestAsync(perPage));
             setRefreshing(false)
         } else {
-            // @ts-ignore
-            dispatch(postsRequestAsync(after));
+            dispatch<any>(postsRequestAsync(after));
         }
         bottomOfList.current.scrollToEnd({animated: true})
     }
@@ -49,7 +46,8 @@ export function Home({navigation}:any) {
         getData('loadMore',after);
     }
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
+            <CarouselMain/>
             {loading && (
                 <Text>Загрузка...</Text>
             )}
@@ -84,6 +82,6 @@ export function Home({navigation}:any) {
             <TouchableOpacity onPress={onPressLoadMore} style={styles.btnMore}>
                 <Text style={styles.textBtn}>Показать еще</Text>
             </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
 }

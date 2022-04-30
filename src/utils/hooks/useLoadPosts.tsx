@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/reducer';
 import { postsRequestAsync } from '../redux/posts/reducerPosts';
 
 export function usePostsLoad(perPage:any) {
+
+    const [mounted, setMounted] = useState(false);
     const loading = useSelector<RootState, any>((state) => state.posts.loading);
     const posts = useSelector<RootState, any>((state) => state.posts.data);
 
@@ -11,8 +13,15 @@ export function usePostsLoad(perPage:any) {
 
     useEffect(() => {
         // @ts-ignore
-        dispatch(postsRequestAsync(perPage));
+        setMounted(true)
     }, []);
+
+    useEffect(() => {
+        if (mounted) {
+            dispatch<any>(postsRequestAsync(perPage));
+        }
+    }, [mounted]);
+
 
     return {
         loading,
