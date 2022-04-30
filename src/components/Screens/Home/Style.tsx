@@ -19,8 +19,9 @@ export const styles = StyleSheet.create({
         height: 50,
     },
     container: {
+        flexGrow: 1,
         marginBottom: 10,
-        paddingBottom: 30
+        paddingBottom: 5
     },
     btnMore: {
         backgroundColor: '#3c54f8',

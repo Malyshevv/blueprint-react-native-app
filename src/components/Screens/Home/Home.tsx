@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, ScrollView, TouchableOpacity , Text, FlatList, Image, RefreshControl} from "react-native";
+import {View, TouchableOpacity , Text, FlatList, Image, RefreshControl} from "react-native";
 
 import {styles} from "./Style";
 import {usePostsLoad} from "../../../utils/hooks/useLoadPosts";
@@ -46,13 +46,18 @@ export function Home({navigation}:any) {
         getData('loadMore',after);
     }
     return (
-        <ScrollView style={styles.container}>
-            <CarouselMain/>
+        <View style={styles.container}>
             {loading && (
                 <Text>Загрузка...</Text>
             )}
             {!loading && listData && (
                 <FlatList
+                    ListHeaderComponent={<CarouselMain/>}
+                    ListFooterComponent={
+                        <TouchableOpacity onPress={onPressLoadMore} style={styles.btnMore}>
+                            <Text style={styles.textBtn}>Показать еще</Text>
+                        </TouchableOpacity>
+                    }
                     ref={bottomOfList}
                     extraData={listData}
                     data={listData}
@@ -79,9 +84,6 @@ export function Home({navigation}:any) {
                     </View>
                 } />
             )}
-            <TouchableOpacity onPress={onPressLoadMore} style={styles.btnMore}>
-                <Text style={styles.textBtn}>Показать еще</Text>
-            </TouchableOpacity>
-        </ScrollView>
+        </View>
     );
 }

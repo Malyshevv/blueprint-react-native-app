@@ -21,7 +21,12 @@ const screenOptionStyle = {
 
 const headerTitle = (title:string) => { return  <Text style={{alignItems: 'center'}}>{title}</Text> }
 const headerRight = <TouchableOpacity onPress={() => alert('Правая кнопка!')}><Ionicons name="shapes" size={20}/></TouchableOpacity>
-const headerLeft = (navigation:any) => { return <TouchableOpacity onPress={() => navigation.openDrawer()}><Ionicons name="menu" size={20}/></TouchableOpacity>}
+const headerLeft = (navigation:any) => {
+    /*if (navigation.getState().routes.name === 'Details') {
+
+    }*/
+    return <TouchableOpacity onPress={() => navigation.openDrawer()}><Ionicons name="menu" size={20}/></TouchableOpacity>
+}
 /*
 * Drawer function
 navigation.openDrawer();
