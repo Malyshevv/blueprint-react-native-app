@@ -1,6 +1,6 @@
 import React from "react"
 import { Text, Button, View } from 'react-native';
-import {Ionicons} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {AboutStackNavigator, ContactStackNavigator, MainStackNavigator} from "./MainStackNavigator";
@@ -8,9 +8,9 @@ import {AboutStackNavigator, ContactStackNavigator, MainStackNavigator} from "./
 const Tab = createBottomTabNavigator();
 
 const headerShow = false;
-const homeIcon = <Ionicons name="home" size={20} color={'black'}/>
-const contactIcon = <Ionicons name="mail" size={20} color={'black'}/>
-const aboutIcon = <Ionicons name="book" size={20} color={'black'}/>
+const homeIcon = <MaterialCommunityIcons name="home" size={20} color={'black'}/>
+const contactIcon = <MaterialCommunityIcons name="mail" size={20} color={'black'}/>
+const aboutIcon = <MaterialCommunityIcons name="book" size={20} color={'black'}/>
 
 const BottomTabNavigator = () => {
     return (

@@ -8,6 +8,7 @@ export function About({navigation}:any) {
     return (
         <View>
             <Text>About</Text>
+
             <Button
                 onPress={() => navigation.goBack()}
                 title="Go to Home"
